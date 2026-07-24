@@ -17,7 +17,9 @@ export function useWAE(event: H3Event, query: Compilable) {
       Authorization: `Bearer ${cfApiToken}`,
     },
     body: compiledQuery,
-    retry: 1,
-    retryDelay: 100, // ms
+    retry: 0,
+    onResponseError({ response }) {
+      console.error('WAE Error:', response.status, response._data)
+    },
   })
 }
